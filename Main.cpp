@@ -133,14 +133,14 @@ int main() {
                 }
             }
 
-                /** Mostrar quantidade de folhas */
+                /** Mostrar quantidade de nós */
 
             case 8: {
                 cout << "Quantidade de nós na árvore: " << arvoreBst.contaNos(arvoreBst.getRaiz());
                 break;
             }
 
-                /** Mostrar quantidade de nós */
+                /** Mostrar quantidade de folhas */
 
             case 9: {
                 cout << "Ainda não implementado!";
