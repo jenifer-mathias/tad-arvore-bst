@@ -45,6 +45,8 @@
 /output
 .idea/
 
+CMakeLists.txt
+
 # VsCode
 .vscode/*
 !.vscode/settings.json
