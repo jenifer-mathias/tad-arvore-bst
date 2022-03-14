@@ -147,14 +147,14 @@ int main() {
                 break;
             }
 
-            /** Consultar valor mínimo */
+                /** Consultar valor mínimo */
 
             case 10: {
                 cout << "Ainda não implementado!";
                 break;
             }
 
-            /** Consultar valor máximo */
+                /** Consultar valor máximo */
 
             case 11: {
                 cout << "Ainda não implementado!";
