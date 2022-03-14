@@ -30,7 +30,7 @@ int main() {
         cout << "\n8 - mostrar quantidade de nós";
         cout << "\n9 - mostrar quantidade de folhas";
         cout << "\n10 - consultar valor mínimo";
-        cout << "\n11 -consultar valor máximo";
+        cout << "\n11 - consultar valor máximo";
         cout << "\n\n_______________________________________________________________\n";
 
         cout << "\n\nInforme sua opção: ";
