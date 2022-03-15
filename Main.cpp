@@ -63,8 +63,9 @@ int main() {
                 int item;
                 cout << "Valor a ser removido: ";
                 cin >> item;
-                if (arvoreBst.getRaiz() == nullptr) {
-                    cout << "\n Elemento não encontrado!";
+                No* pesquisa = arvoreBst.pesquisaElemento(arvoreBst.getRaiz(), item);
+                if (pesquisa == nullptr) {
+                    cout << "\nElemento não encontrado!";
                     break;
                 } else {
                     arvoreBst.removeElemento(arvoreBst.getRaiz(), item);
