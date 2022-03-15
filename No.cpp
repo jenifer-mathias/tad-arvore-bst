@@ -26,3 +26,7 @@ void No::setEsq(No *no) {
 void No::setDir(No *no) {
     dir = no;
 }
+
+void No::setChave(int key) {
+    this->chave = key;
+}

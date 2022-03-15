@@ -4,7 +4,6 @@
 class No {
 
 private:
-    int chave;
     No* esq;
     No* dir;
 
@@ -15,6 +14,9 @@ public:
     No* getDir();
     void setEsq(No*);
     void setDir(No*);
+    void setChave(int chave);
+
+    int chave;
 };
 #endif
 

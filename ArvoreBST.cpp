@@ -93,26 +93,64 @@ int ArvoreBST::contaNos(No *no) {
 
 int ArvoreBST::contaFolhas(No *no) {
     if (no == nullptr) return 0;
-
-    else if(no->getEsq() == nullptr && no->getDir() == nullptr)
-      return 1
+    else if (no->getEsq() == nullptr && no->getDir() == nullptr)
+        return 1;
     else
-      return contaFolhas(no->getEsq()) + contaFolhas(no->getDir());
+        return contaFolhas(no->getEsq()) + contaFolhas(no->getDir());
 }
 
-void ArvoreBST::valorMin(No *no) {
-
+int ArvoreBST::valorMinimo(No *no) {
+    if (no == nullptr) return 0;
+    if (no->getEsq() == nullptr) return no->getChave();         /** se a árvore estiver vazia, retorna 0 elementos */
+    else return valorMinimo(no->getEsq());               /** senão, continua percorrendo recursivamente à esquerda */
 }
 
-void ArvoreBST::valorMax(No *no) {
-    if (no->getDir() == nullptr) {              /** verifica se o nó possui um nó a direita */
-        cout << "O valor máximo é " << no->getChave();                  /** se não, o valor máximo é o deste nó */
+int ArvoreBST::valorMaximo(No *no) {
+    if (no == nullptr) return 0;
+    if (no->getDir() == nullptr) return no->getChave();         /** se a árvore estiver vazia, retorna 0 elementos */
+    else return valorMaximo(no->getDir());                /** senão, continua percorrendo recursivamente à direita */
+}
+
+No *ArvoreBST::removeElemento(No *no, int chave) {
+    /** árvore vazia */
+    if (no == nullptr) return nullptr;
+
+    /** pesquisa valor a ser removido */
+    if (chave < no->getChave()) {
+        removeElemento(no->getEsq(), chave);
+    } else if (chave > no->getChave())
+        removeElemento(no->getDir(), chave);
+
+    else {
+
+        /** nó não possui filhos - remoção em folhas */
+        No *aux = no;
+        if (no->getEsq() == nullptr && no->getDir() == nullptr) {
+            free(aux);
+            no = nullptr;
+        }
+
+            /** nó sem filhos em uma duas subárvores */
+            /** possui filhos à direita */
+        else if (no->getEsq() == nullptr) {
+            No *temp1 = no->getDir();
+            free(no);
+            return temp1;
+        }
+            /** possui filhos à esqueda */
+        else if (no->getDir() == nullptr) {
+            No *temp2 = no->getEsq();
+            free(no);
+            return temp2;
+        }
+
+        else {
+            No *temp3 = reinterpret_cast<No *>(valorMinimo(no->getDir()));
+            no->chave = temp3->getChave();
+            no->setDir(removeElemento(no->getDir(), temp3->getChave()));
+        }
     }
-    else {                                      /** se sim, continua percorrendo recursivamente */
-        valorMax(no->getDir());
-    }
+    return no;
 }
 
-void ArvoreBST::removeElemento(No *no, int chave) {
 
-}

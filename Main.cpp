@@ -52,20 +52,26 @@ int main() {
                 int item;
                 cout << "Valor a ser inserido: ";
                 cin >> item;
-                if (item == no->getChave()) {
-                    cout << "\nElemento já existe na árvore!";
-                } else {
-                    arvoreBst.insereElemento(item);
-                    cout << "\nElemento " << item << " adicionado com sucesso!";
-                    break;
-                }
+                // posteriormente colocar uma validação para quando o elemento já foi add.
+                arvoreBst.insereElemento(item);
+                cout << "\nElemento " << item << " adicionado com sucesso!";
+                break;
             }
 
                 /** Remover elemento */
 
             case 2: {
-                cout << "\n Ainda não implementado! ";
-                break;
+                int item;
+                cout << "Valor a ser removido: ";
+                cin >> item;
+                if (arvoreBst.getRaiz() == nullptr) {
+                    cout << "\n Elemento não encontrado!";
+                    break;
+                } else {
+                    arvoreBst.removeElemento(arvoreBst.getRaiz(), item);
+                    cout << "\nElemento " << item << " removido com sucesso!";
+                    break;
+                }
             }
 
                 /** Imprimir a árvore em ordem */
@@ -143,22 +149,21 @@ int main() {
                 /** Mostrar quantidade de folhas */
 
             case 9: {
-                cout << "Quantidade de folhas na árvore: "<< arvoreBst.contaFolhas(arvoreBst.getRaiz());
+                cout << "Quantidade de folhas na árvore: " << arvoreBst.contaFolhas(arvoreBst.getRaiz());
                 break;
             }
 
                 /** Consultar valor mínimo */
 
             case 10: {
-                cout << "Ainda não implementado!";
+                cout << "Valor mínimo da árvore: " << arvoreBst.valorMinimo(arvoreBst.getRaiz());
                 break;
             }
 
                 /** Consultar valor máximo */
 
             case 11: {
-                No *no = arvoreBst.getRaiz();
-                arvoreBst.valorMax(no);
+                cout << "Valor máximo da árvore: " << arvoreBst.valorMaximo(arvoreBst.getRaiz());
                 break;
             }
 
