@@ -17,7 +17,7 @@ public:
     int contaNos(No* no);
     int contaFolhas(No* no);
     void valorMin(No* no);
-    void valorMax(No* no);
+    int valorMax(No* no);
     void removeElemento(No* no, int chave);
     No* getRaiz();
 };

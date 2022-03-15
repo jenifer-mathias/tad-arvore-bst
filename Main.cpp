@@ -158,7 +158,7 @@ int main() {
 
             case 11: {
                 No *no = arvoreBst.getRaiz();
-                cout << "O valor máximo é " << valorMax(No * no);
+                cout << "O valor máximo é " << valorMax(no);
                 break;
             }
 
