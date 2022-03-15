@@ -137,7 +137,7 @@ No *ArvoreBST::removeElemento(No *no, int chave) {
             free(no);
             return temp1;
         }
-            /** possui filhos à esqueda */
+            /** possui filhos à esquerda */
         else if (no->getDir() == nullptr) {
             No *temp2 = no->getEsq();
             free(no);

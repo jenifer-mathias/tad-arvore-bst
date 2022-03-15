@@ -7,7 +7,6 @@ using namespace std;
 int main() {
 
     ArvoreBST arvoreBst;
-    No *no;
 
     int opc;
 
