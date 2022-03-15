@@ -143,7 +143,7 @@ int main() {
                 /** Mostrar quantidade de folhas */
 
             case 9: {
-                cout << "Ainda não implementado!";
+                cout << "Quantidade de folhas na árvore: "<< arvoreBst.contaFolhas(arvoreBst.getRaiz());
                 break;
             }
 
