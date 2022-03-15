@@ -92,7 +92,12 @@ int ArvoreBST::contaNos(No *no) {
 }
 
 int ArvoreBST::contaFolhas(No *no) {
+    if (no == nullptr) return 0;
 
+    else if(no->getEsq() == nullptr && no->getDir() == nullptr)
+      return 1
+    else
+      return contaFolhas(no->getEsq()) + contaFolhas(no->getDir());
 }
 
 void ArvoreBST::valorMin(No *no) {
