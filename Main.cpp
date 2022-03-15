@@ -157,7 +157,8 @@ int main() {
                 /** Consultar valor máximo */
 
             case 11: {
-                cout << "Ainda não implementado!";
+                No *no = arvoreBst.getRaiz();
+                cout << "O valor máximo é " << valorMax(No * no);
                 break;
             }
 
