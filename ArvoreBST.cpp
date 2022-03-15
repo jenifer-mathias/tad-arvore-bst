@@ -99,9 +99,9 @@ void ArvoreBST::valorMin(No *no) {
 
 }
 
-int ArvoreBST::valorMax(No *no) {
+void ArvoreBST::valorMax(No *no) {
     if (no->getDir() == nullptr) {              /** verifica se o nó possui um nó a direita */
-        return no->getChave();                  /** se não, o valor máximo é o deste nó */
+        cout << "O valor máximo é " << no->getChave();                  /** se não, o valor máximo é o deste nó */
     }
     else {                                      /** se sim, continua percorrendo recursivamente */
         valorMax(no->getDir());
