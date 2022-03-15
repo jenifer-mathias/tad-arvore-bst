@@ -117,9 +117,9 @@ No *ArvoreBST::removeElemento(No *no, int chave) {
 
     /** pesquisa valor a ser removido */
     if (chave < no->getChave()) {
-        removeElemento(no->getEsq(), chave);
+        no->setEsq(removeElemento(no->getEsq(), chave));
     } else if (chave > no->getChave())
-        removeElemento(no->getDir(), chave);
+        no->setDir(removeElemento(no->getDir(), chave));
 
     else {
 
