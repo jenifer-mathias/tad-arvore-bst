@@ -124,9 +124,7 @@ No *ArvoreBST::removeElemento(No *no, int chave) {
     else {
 
         /** nó não possui filhos - remoção em folhas */
-        No *aux = no;
         if (no->getEsq() == nullptr && no->getDir() == nullptr) {
-            delete aux;
             no = nullptr;
         }
 
