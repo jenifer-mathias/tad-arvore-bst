@@ -14,7 +14,6 @@ public:
     No* getDir();
     void setEsq(No*);
     void setDir(No*);
-    void setChave(int chave);
 
     int chave;
 };
