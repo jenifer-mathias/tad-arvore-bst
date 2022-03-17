@@ -111,44 +111,45 @@ int ArvoreBST::valorMaximo(No *no) {
     else return valorMaximo(no->getDir());                /** senão, continua percorrendo recursivamente à direita */
 }
 
-No *ArvoreBST::removeElemento(No *no, int chave) {
-    /** árvore vazia */
-    if (no == nullptr) return nullptr;
-
-    /** pesquisa valor a ser removido */
-    if (chave < no->getChave()) {
-        no->setEsq(removeElemento(no->getEsq(), chave));
-    } else if (chave > no->getChave())
-        no->setDir(removeElemento(no->getDir(), chave));
-
-    else {
-
-        /** nó não possui filhos - remoção em folhas */
-        if (no->getEsq() == nullptr && no->getDir() == nullptr) {
-            no = nullptr;
-        }
-
-            /** nó sem filhos em uma duas subárvores */
-            /** possui filhos à direita */
-        else if (no->getEsq() == nullptr) {
-            No *temp1 = no->getDir();
-            delete no;
-            return temp1;
-        }
-            /** possui filhos à esquerda */
-        else if (no->getDir() == nullptr) {
-            No *temp2 = no->getEsq();
-            delete no;
-            return temp2;
-        }
-
-        else {
-            No *temp3 = reinterpret_cast<No *>(valorMinimo(no->getDir()));
-            no->chave = temp3->getChave();
-            no->setDir(removeElemento(no->getDir(), temp3->getChave()));
-        }
-    }
-    return no;
-}
+/** ~ ~ ~ ARRUMAR ~ ~ ~ */
+//No *ArvoreBST::removeElemento(No *no, int chave) {
+//    /** árvore vazia */
+//    if (no == nullptr) return nullptr;
+//
+//    /** pesquisa valor a ser removido */
+//    if (chave < no->getChave()) {
+//        no->setEsq(removeElemento(no->getEsq(), chave));
+//    } else if (chave > no->getChave())
+//        no->setDir(removeElemento(no->getDir(), chave));
+//
+//    else {
+//
+//        /** nó não possui filhos - remoção em folhas */
+//        if (no->getEsq() == nullptr && no->getDir() == nullptr) {
+//            no = nullptr;
+//        }
+//
+//            /** nó sem filhos em uma duas subárvores */
+//            /** possui filhos à direita */
+//        else if (no->getEsq() == nullptr) {
+//            No *temp1 = no->getDir();
+//            delete no;
+//            return temp1;
+//        }
+//            /** possui filhos à esquerda */
+//        else if (no->getDir() == nullptr) {
+//            No *temp2 = no->getEsq();
+//            delete no;
+//            return temp2;
+//        }
+//
+//        else {
+//            No *temp3 = reinterpret_cast<No *>(valorMinimo(no->getDir()));
+//            no->chave = temp3->getChave();
+//            no->setDir(removeElemento(no->getDir(), temp3->getChave()));
+//        }
+//    }
+//    return no;
+//}
 
 
