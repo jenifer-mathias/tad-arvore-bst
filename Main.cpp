@@ -82,15 +82,12 @@ int main() {
                 int item;
                 cout << "Valor a ser removido: ";
                 cin >> item;
-                No* pesquisa = arvoreBst.pesquisaElemento(arvoreBst.getRaiz(), item);
-                if (pesquisa == nullptr) {
-                    cout << "\nElemento não encontrado!";
-                    break;
-                } else {
-                    arvoreBst.removeElemento(arvoreBst.getRaiz(), item);
+                bool resp = arvoreBst.removeElemento(item);
+                if (resp)
                     cout << "\nElemento " << item << " removido com sucesso!";
-                    break;
-                }
+                else
+                    cout << "\nElemento não encontrado!";
+                break;
             }
 
                 /** Imprimir a árvore em ordem */

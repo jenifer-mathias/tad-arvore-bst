@@ -130,45 +130,95 @@ int ArvoreBST::valorMaximo(No *no) {
     else return valorMaximo(no->getDir());                /** senão, continua percorrendo recursivamente à direita */
 }
 
-/** ~ ~ ~ ARRUMAR ~ ~ ~ */
-//No *ArvoreBST::removeElemento(No *no, int chave) {
-//    /** árvore vazia */
-//    if (no == nullptr) return nullptr;
-//
-//    /** pesquisa valor a ser removido */
-//    if (chave < no->getChave()) {
-//        no->setEsq(removeElemento(no->getEsq(), chave));
-//    } else if (chave > no->getChave())
-//        no->setDir(removeElemento(no->getDir(), chave));
-//
-//    else {
-//
-//        /** nó não possui filhos - remoção em folhas */
-//        if (no->getEsq() == nullptr && no->getDir() == nullptr) {
-//            no = nullptr;
-//        }
-//
-//            /** nó sem filhos em uma duas subárvores */
-//            /** possui filhos à direita */
-//        else if (no->getEsq() == nullptr) {
-//            No *temp1 = no->getDir();
-//            delete no;
-//            return temp1;
-//        }
-//            /** possui filhos à esquerda */
-//        else if (no->getDir() == nullptr) {
-//            No *temp2 = no->getEsq();
-//            delete no;
-//            return temp2;
-//        }
-//
-//        else {
-//            No *temp3 = reinterpret_cast<No *>(valorMinimo(no->getDir()));
-//            no->chave = temp3->getChave();
-//            no->setDir(removeElemento(no->getDir(), temp3->getChave()));
-//        }
-//    }
-//    return no;
-//}
+No *encontraNoSucessor(No *apaga) {                  /** O parametro é a referencia para o No que deseja-se apagar */
+    No *paidosucessor = apaga;
+    No *sucessor = apaga;
+    No *atual = apaga->getDir();                                                /** vai para a subarvore a direita */
+
+    while (atual != nullptr) {                                      /**  enquanto nao chegar no no mais a esquerda */
+        paidosucessor = sucessor;
+        sucessor = atual;
+        atual = atual->getEsq();                                                       /** caminha para a esquerda */
+        /** (Explicação A) */
+    }
+    if (sucessor != apaga->getDir()) {      /** se sucessor nao é o filho a direita do nó que deverá ser eliminado */
+        paidosucessor->setEsq(sucessor->getDir());    /** pai herda os filhos do sucessor que sempre será à direita */
+        sucessor->setDir(apaga->getDir());                    /** guardando a referência à direita do sucessor para */
+    }                                                            /** quando ele assumir a posição correta na árvore */
+    /** (Explicação B) */
+    return sucessor;
+}
+
+/** Explicação A
+// *********************************************************************************
+// quando sair do while "sucessor" sera o nó mais à esquerda da subarvore à direita
+// "paidosucessor" sera o pai de sucessor e "apaga" o nó que devera ser eliminado
+// *********************************************************************************/
+
+/** Explicação B
+// *********************************************************************************
+// lembrando que o sucessor nunca poderá ter filhos a esquerda, pois, ele sempre será
+// o nó mais à esquerda da subarvore à direita do nó "apaga".
+// lembrando também que sucessor sempre será o filho à esquerda do pai
+// *********************************************************************************/
+
+
+bool ArvoreBST::removeElemento(int chave) {
+    if (raiz == nullptr) return false;                                                      /** árvore está vazia */
+    No *atual = raiz;
+    No *pai = raiz;
+    bool temFilhoEsq = true;                                               /** ****** Buscando o valor ********** */
+    while (atual->getChave() != chave) {                                       /** enquanto nao encontrar a chave */
+        pai = atual;
+        if (chave < atual->getChave()) {                                                /** caminha para esquerda */
+            atual = atual->getEsq();
+            temFilhoEsq = true;
+        } else {                                                                         /** caminha para direita */
+            atual = atual->getDir();
+            temFilhoEsq = false;
+        }
+        if (atual == nullptr) return false;                           /** encontrou uma folha e não achou a chave */
+    }
+
+    /** **************************************************************
+    // se chegou aqui quer dizer que encontrou a chave na árvore
+    // "atual": contém a referência ao nó a ser eliminado
+    // "pai": contem a referência para o pai do nó a ser eliminado
+    // "temFilhoEsq": verdadeiro se atual é filho a esquerda do pai
+    // ***************************************************************/
+
+    if (atual->getEsq() == nullptr && atual->getDir() == nullptr) {
+    /** Se é uma folha, basta eliminá-lo e fazer o ptr do pai receber nullptr */
+        if (atual == raiz) raiz = nullptr;
+        else if (temFilhoEsq)
+            pai->setEsq(nullptr);
+        else
+            pai->setDir(nullptr);                                                                /** apaga o nó */
+    }
+
+    else if (atual->getDir() == nullptr) {
+    /** Se é pai e não possui um filho a direita, substitui pela subarvore a esquerda */
+        if (atual == raiz) raiz = atual->getEsq();
+        else if (temFilhoEsq) pai->setEsq(atual->getEsq());                      /** se for filho a esquerda do pai */
+        else pai->setDir(atual->getEsq());                                        /** se for filho a direita do pai */
+    }
+
+    else if (atual->getEsq() == nullptr) {
+    /** Se é pai e não possui um filho à esquerda, substitui pela subarvore à direita */
+        if (atual == raiz) raiz = atual->getDir();
+        else if (temFilhoEsq) pai->setEsq(atual->getDir());                      /** se for filho à esquerda do pai */
+        else pai->setDir(atual->getDir());                                        /** se for filho à direita do pai */
+
+    } else {                                                                       /** Se possui filhos à esq e dir */
+        No *sucessor = encontraNoSucessor(atual);
+        /** Usando o metodo sucessor para encontrar o no mais a esquerda da subarvore a direita (menor dos maiores) */
+        if (atual == raiz) raiz = sucessor;
+        else if (temFilhoEsq) pai->setEsq(sucessor);                             /** se for filho à esquerda do pai */
+        else pai->setDir(sucessor);                                               /** se for filho à direita do pai */
+        sucessor->setEsq(atual->getEsq());                /** acertando os ponteiros esquerda e direita do sucessor */
+    }
+    return true;
+}
+
 
 

@@ -51,5 +51,5 @@ public:
 
     int valorMaximo(No *no);
 
-    No *removeElemento(No *no, int chave);
+    bool removeElemento(int chave);
 };
